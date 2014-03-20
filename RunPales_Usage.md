@@ -1,9 +1,7 @@
 RunPales v1.0
 =============
 
-Usage
-
-Extract RDC values from .pdb files using the PALES program.
+RunPales. Extract RDC values from .pdb files using the PALES program.
 
 Mandatory options:
 
