@@ -1,6 +1,6 @@
 For the correct execution of these scripts you need to have install in your computer:
 
-. Python (www.python.or) version 2.7 or above together with the following libraries:
+. Python (www.python.org) version 2.7 or above together with the following libraries:
 
       . SciPy (www.scipy.org)
 
