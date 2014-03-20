@@ -28,7 +28,9 @@ Computational and Theoretical Chemistry Group, http://www.iqac.csic.es/qteor/
 
 
 ----------------------------------------------------------
- Every file of this repository is freely availabe under: 
- . Copyright : CSIC, Ramon Crehuet Simon (2014)           
+ Every file of this repository is freely availabe under:
+ 
+ . Copyright : CSIC, Ramon Crehuet Simon (2014) 
+ 
  . Licence   : GNU_V2                                    
 -----------------------------------------------------------
