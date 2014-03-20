@@ -6,4 +6,4 @@ For the correct execution of these scripts you need to have install in your comp
 
       . NumPy (www.numpy.org)
 
-      . Matplotlib (matplotlib.org)
+      . Matplotlib (www.matplotlib.org)
