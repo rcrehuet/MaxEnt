@@ -21,11 +21,11 @@ def generate_rdcs_files(pales_path, initial_structure, initial_dipolar_coupling,
 
 argparser = argparse.ArgumentParser(description="Extract RDC values from .pdb files using the PALES program.")
 data=argparser.add_argument_group("")
-data.add_argument('--path', '-p', help ="The directory where the pales executable is.")
+data.add_argument('--path', '-p', help ="The path to the directory where the pales executable is.")
 data.add_argument('--indirectory', '-id', help ="The directory where the pdbs are.")
 data.add_argument('--outdirectory', '-od', help ="The directory where the RDCs outfiles are going to be.")
-data.add_argument('--inD', '-i',  help ="Pales Dipolar Coupling PDB input file. Determine which rdcs to calculate.")
-data.add_argument('--H', action='store_true', help ="Whether to use -H pales option. Enablle comparision of all PDB atoms. By default, all except Hydrogens")
+data.add_argument('--inD', '-i',  help ="Pales option. Dipolar Coupling PDB input file. Determine which rdcs to calculate.")
+data.add_argument('--H', action='store_true', help ="Whether to use -H pales option. Enable comparision of all PDB atoms. By default, all except Hydrogens")
 
 global args
 args = argparser.parse_args()
