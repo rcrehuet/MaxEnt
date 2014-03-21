@@ -6,9 +6,9 @@ Maximum Entropy. Fit calculate RDCs to experimental RDCs
 Mandatory arguments:
 
 
--c, --calculated                      Entry the file that contains the calculated RDCs
+-c, --calculated                      Entry the file that contains the second set of RDCs. Calculated RDCs
 
--e, --experimental                    Entry the file that contains the experimental RDCs
+-e, --experimental                    Entry the file that contains the first set od RDCS. Experimental or Calculated RDCs
 
 -r, --initial_residue                 Enter the initial residue number
 
