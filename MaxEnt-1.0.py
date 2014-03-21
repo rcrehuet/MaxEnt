@@ -1,8 +1,7 @@
 """
-A maximum entropy implementation to reproduce RDCs
-Giving the experimental and calcultes RDCsd values
-and temperature data, calculates the exact weights
-(and threshold) by reweighting
+A maximum entropy implementation to reproduce RDCs.
+Giving two sets of RDCs values, optimize the values 
+of one of the sets respect to the other.
 """
 import sys, io
 import numpy as np 
