@@ -8,7 +8,7 @@ Mandatory arguments:
 
 -c, --calculated                      Entry the file that contains the second set of RDCs. Calculated RDCs
 
--e, --experimental                    Entry the file that contains the first set od RDCS. Experimental or Calculated RDCs
+-e, --experimental                    Entry the file that contains the first set od RDCS. Experimental or Calculated RDCs.                                       Are the values to which second set of RDCs are going tobe fitted.
 
 -r, --initial_residue                 Enter the initial residue number
 
