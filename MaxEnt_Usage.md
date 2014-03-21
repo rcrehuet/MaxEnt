@@ -1,7 +1,7 @@
 MaxEnt v1.0
 ===========
 
-Maximum Entropy. Fit calculate RDCs to experimental RDCs
+Maximum Entropy. Fit a set of calculated RDCs to experimental or calculated RDCs
 
 Mandatory arguments:
 
