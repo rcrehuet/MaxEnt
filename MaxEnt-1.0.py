@@ -1,6 +1,6 @@
 """
 A maximum entropy implementation to reproduce RDCs.
-Giving two sets of RDCs values, optimize the values 
+Giving two sets of RDCs values, optimizes the values 
 of one of the sets respect to the other.
 """
 import sys, io
