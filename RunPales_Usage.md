@@ -11,7 +11,8 @@ Mandatory options:
 
 -od, --outdirectory                        Indicate the the directory where the RDCs outfiles are going to be generated.
   
--i,  --inD IND,                            Pales option. Indicate where is the Dipolar Coupling PDB input file, that                                                 determines which rdcs to calculate.
+-i,  --inD IND,                            Pales option. Indicate where is the Dipolar Coupling PDB input file,
+                                           that determines which rdcs to calculate.
 
 
 
