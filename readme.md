@@ -1,8 +1,7 @@
 MaxEnt
 ======
 
-MxEnt is an script that incorporates a maximum entropy implementation to reproduce RDCs that giving the experimental
-and calculates RDCs values and temperature data, calculates the exact weights (and threshold) by reweighting.
+MxEnt is an script that incorporates a maximum entropy implementation to reproduce RDCs that giving two sets of RDCs values and temperature data, optimize the values of one of the sets respect to the other.
 
 RunPales
 ========
