@@ -32,7 +32,8 @@ Computational and Theoretical Chemistry Group, http://www.iqac.csic.es/qteor/
  
  . Licence   : GNU_V2   
  
- . Copyright : CSIC, Ramon Crehuet Simon (2014) 
+ 
+ © CSIC, Ramon Crehuet Simon (2014) 
  
                                  
 
