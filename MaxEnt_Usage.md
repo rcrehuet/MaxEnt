@@ -23,7 +23,7 @@ Optional arguments:
 
 -sw, --save_weights {dat,txt,npy}     Save the Optimized weights into a file type '.dat', '.txt' or '.npy'
 
--si, --save_image                     Save an image of the Optimized RDCs together with the initial RDCs sets in 'png' or                                       'jpeg' format
+-si, --save_image                     Save an image of the Optimized RDCs together with the initial RDCs sets in '.png' or                                       '.jpeg' format
 
 
 Usage example :
