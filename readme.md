@@ -1,13 +1,13 @@
 MaxEnt
 ======
 
-MxEnt is an script that incorporates a maximum entropy implementation to reproduce RDCs that giving two sets of RDCs values, optimizes the values of one of the sets respect to the other.
+MxEnt is an script that incorporates a maximum entropy implementation to reproduce RDCs that giving two sets of RDCs values, optimizes the values of the first set respect to the other. The first set corresponds to RDCs calculated using for example RunPales, and the second set is an ensemble of experimental or caclculated RDCs.
 
 RunPales
 ========
 
 RunPales is an script that execute the PALES (http://spin.niddk.nih.gov/bax/software/PALES/) pales-linux to
-generate RDCs from the PDBs of a directory.
+generate RDCs from PDB files.
 
 
 Versions
