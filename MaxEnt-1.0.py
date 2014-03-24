@@ -82,6 +82,7 @@ data.add_argument("--calculated", "-c", help="Second set of RDCs. Entry the file
 data.add_argument("--experimental", "-e", help = "First set of RDCs. Experimental or Calculated RDCs ensemble to the second set is going to be fitted")
 data.add_argument("--save", "-s", choices=["dat","txt","npy"], default=False, help="Save the Optimized RDCs")
 data.add_argument("--save_weights", "-sw", choices=["dat","txt","npy"], default=False, help="Save the Optimized weights")
+data.add_argument("--save_image", "-si",  choices=["png","jpeg"], default=False, help="Save an image of the Optimized RDCs together with the initial RDCs sets")
 
 
 residues=argparser.add_argument_group("residues", "Range of residues represnted by the RDCs")
@@ -178,4 +179,9 @@ if args.save_weights == "txt" or args.save == "dat":
     np.savetxt('./Optimized_weights.'+args.save, np.sort(w(lam,q)))
 if args.save_weights == "npy" :           
     np.save('./Optimized_weights', np.sort(w(lam,q)))
+#Save Iamge
+if args.save_image == "png":
+	plt.savefig('Final_Optimized_RDCs.png')
+if args.save_image == "jpeg":
+	plt.savefig('Final_Optimized_RDCs.jpeg')    
 input()
