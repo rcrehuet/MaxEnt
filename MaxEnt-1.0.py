@@ -82,7 +82,7 @@ data.add_argument("--calculated", "-c", help="Second set of RDCs. Entry the file
 data.add_argument("--experimental", "-e", help = "First set of RDCs. Experimental or Calculated RDCs ensemble to the second set is going to be fitted")
 data.add_argument("--save", "-s", choices=["dat","txt","npy"], default=False, help="Save the Optimized RDCs")
 data.add_argument("--save_weights", "-sw", choices=["dat","txt","npy"], default=False, help="Save the Optimized weights")
-data.add_argument("--save_image", "-si",  choices=["png","jpeg"], default=False, help="Save an image of the Optimized RDCs together with the initial RDCs sets")
+data.add_argument("--save_image", "-si",  choices=["png","jpeg"], default=False, help="Save an image of the Optimized RDCs together with the initial RDCs sets and the optimized weights")
 
 
 residues=argparser.add_argument_group("residues", "Range of residues represnted by the RDCs")
