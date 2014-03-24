@@ -78,8 +78,8 @@ def rmsd(lam, q, Q):
 #Defining the arguments:
 argparser = argparse.ArgumentParser(description="Maximum Entropy. Fit calculate RDCs to experimental RDCs")
 data=argparser.add_argument_group("Initial_data", "Entry the files that contain the RDCs to evaluate.")
-data.add_argument("--calculated", "-c", help="Second set of RDCs. Calculated RDCs")
-data.add_argument("--experimental", "-e", help = "First set of RDCs. Experimental or Calculated RDCs")
+data.add_argument("--calculated", "-c", help="Second set of RDCs. Entry the file that contains the second set of RDCs. Calculated RDCs.")
+data.add_argument("--experimental", "-e", help = "First set of RDCs. Experimental or Calculated RDCs ensemble to the second set is going to be fitted")
 data.add_argument("--save", "-s", choices=["dat","txt","npy"], default=False, help="Save the Optimized RDCs")
 data.add_argument("--save_weights", "-sw", choices=["dat","txt","npy"], default=False, help="Save the Optimized weights")
 
