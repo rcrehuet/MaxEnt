@@ -7,7 +7,7 @@ RunPales
 ========
 
 RunPales is an script that execute the PALES (http://spin.niddk.nih.gov/bax/software/PALES/) pales-linux to
-generate all RDCs from the PDBs of a directory.
+generate RDCs from the PDBs of a directory.
 
 
 Versions
