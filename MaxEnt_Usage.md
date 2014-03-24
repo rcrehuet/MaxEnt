@@ -10,20 +10,20 @@ Mandatory arguments:
 
 -e, --experimental                    Entry the file that contains the first set od RDCS. Experimental or Calculated RDCs                                       ensemble. Are the values to which second set of RDCs values are going to be fitted.
 
--r, --initial_residue                 Enter the initial residue number
+-r, --initial_residue                 Enter the initial residue number.
 
--f, --final_residue                   Enter the final residue number
+-f, --final_residue                   Enter the final residue number.
 
 
 Optional arguments:
   
--h,  --help                           Show the help message and exit
+-h,  --help                           Show the help message and exit.
 
--s,  --save {dat,txt,npy}             Save the Optimized RDCs into a file type '.dat', '.txt' or '.npy'
+-s,  --save {dat,txt,npy}             Save the Optimized RDCs into a file type '.dat', '.txt' or '.npy'.
 
--sw, --save_weights {dat,txt,npy}     Save the Optimized weights into a file type '.dat', '.txt' or '.npy'
+-sw, --save_weights {dat,txt,npy}     Save the Optimized weights into a file type '.dat', '.txt' or '.npy'.
 
--si, --save_image                     Save an image of the Optimized RDCs together with the initial RDCs sets in '.png' or                                       '.jpeg' format
+-si, --save_image                     Save an image of the Optimized RDCs together with the initial RDCs sets and the                                           distribution of the weights after optimization in '.png' or '.jpeg' format.                                               Optimized RDCs (red), experimental od calculated RDCs (blue), calculated unweighted                                       RDCs (green).
 
 
 Usage example :
