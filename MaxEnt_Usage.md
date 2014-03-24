@@ -6,7 +6,7 @@ Maximum Entropy. Fit a set of calculated RDCs to experimental or calculated RDCs
 Mandatory arguments:
 
 
--c, --calculated                      Entry the file that contains the second set of RDCs. Calculated RDCs
+-c, --calculated                      Entry the file that contains the second set of RDCs. Average of calculated RDCs from                                       a molecular simulation.
 
 -e, --experimental                    Entry the file that contains the first set od RDCS. Experimental or Calculated RDCs.                                       Are the values to which second set of RDCs values are going to be fitted.
 
