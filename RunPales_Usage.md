@@ -1,28 +1,28 @@
 RunPales v1.0
 =============
 
-RunPales. Extract RDC values from .pdb files using the PALES program.
+usage: `RunPales.py [-h] --path PATH [--outdirectory OUTDIRECTORY]
+                   [--outarray OUTARRAY] --inD IND [-H]
+                   indirectory`
 
-Mandatory arguments:
+Extract RDC values from .pdb files using the PALES program.
 
-`-p`, `--path`                             Indicate the the path to the directory where the PALES executable is.
+positional arguments:
+  `indirectory`           The directory where the pdbs are.
 
-`-id`, `--indirectory`                         Indicate the localization of the directory where the pdbs are.
+optional arguments:
+  `-h`, `--help`            show this help message and exit
+  `--path PATH`, `-p PATH`  The path to the pales executable is.
+  `--outdirectory OUTDIRECTORY`, `-outD OUTDIRECTORY`
+                        The directory where the RDCs outfiles are going to be.
+                        (Default is indirectory)
+  `--outarray OUTARRAY`, `-outA OUTARRAY`
+                        The name of the file containing the array of RDCs.
+                        (Default is rdcs.npy)
+  `--inD IND`             Dipolar Coupling input file. Determine which rdcs to
+                        calculate (see Pales odcumpentation).
+  `-H`                    Use -H option in Pales (see Pales documentation).
 
-`-od`, `--outdirectory`                        Indicate the the directory where the RDCs outfiles are going to be generated.
-  
-`-i`,  `--inD` ,                            Pales option. Indicate where is the Dipolar Coupling input file,
-                                           that determines which rdcs to calculate.
-
-
-
-
-Optional arguments:
-
-`--help`, `-h`                                 Show this help message and exit.
-
-
-`-H`                                         PALES option.  Determine whether to use -H. This option, uses the explicit                                                hydrogens of the PDB. See the PALES documentation for further details.
 
 
 Usage examples:
