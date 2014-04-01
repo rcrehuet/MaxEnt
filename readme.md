@@ -12,7 +12,7 @@ RunPales
 ========
 
 RunPales is an script that execute the PALES (http://spin.niddk.nih.gov/bax/software/PALES/) pales-linux to
-generate RDCs from PDB files.
+generate RDCs from PDB files. It then reads the Pales RDC files and converts the data into a numpy array. This array is the input MaxEnt reads.
 
 
 Versions
