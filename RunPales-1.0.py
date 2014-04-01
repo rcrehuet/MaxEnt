@@ -25,7 +25,7 @@ data.add_argument('--path', '-p', help ="The path to the directory where the pal
 data.add_argument('--indirectory', '-id', help ="The directory where the pdbs are.")
 data.add_argument('--outdirectory', '-od', help ="The directory where the RDCs outfiles are going to be.")
 data.add_argument('--inD', '-i',  help ="Pales option. Dipolar Coupling PDB input file. Determine which rdcs to calculate.")
-data.add_argument('--H', action='store_true', help ="Whether to use -H pales option. Enable comparision of all PDB atoms. By default, all except Hydrogens")
+data.add_argument('-H', action='store_true', help ="Use -H option in Pales. Enable comparision of all PDB atoms. By default, all except Hydrogens")
 
 global args
 args = argparser.parse_args()
