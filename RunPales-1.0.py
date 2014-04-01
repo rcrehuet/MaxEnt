@@ -7,10 +7,22 @@ import sys, os
 import glob
 import subprocess as subp
 import argparse
+import numpy as np
 
 def createPath(path):
     if not os.path.isdir(path):
         os.mkdir(path)
+
+def get_rdcs(name):
+    filein = open(name, 'r')
+    rdcs = []
+    for line in filein:
+        line = line.split()
+        try: int(line[0])
+        except ValueError: continue
+        except IndexError: continue
+        rdcs.append(float(line[8]))
+    return np.asarray(rdcs)
 
 def generate_rdcs_files(pales_path, initial_structure, initial_dipolar_coupling, dipolar_coupling_output, H):
     fileout = open("/dev/null", 'w')
@@ -28,9 +40,13 @@ def generate_rdcs_files(pales_path, initial_structure, initial_dipolar_coupling,
 parser = argparse.ArgumentParser(description="Extract RDC values from .pdb files using the PALES program.")
 parser.add_argument('--path', '-p', help ="The path to the pales executable is.", required=True)
 parser.add_argument('indirectory', help ="The directory where the pdbs are.")
-parser.add_argument('--outdirectory', '-outD', help ="The directory where the RDCs outfiles are going to be. (Default is indirectory)")
-parser.add_argument('--inD', help ="Dipolar Coupling input file. Determine which rdcs to calculate (see Pales odcumpentation)."\
-                      , required=True)
+parser.add_argument('--outdirectory', '-outD', \
+  help ="The directory where the RDCs outfiles are going to be. (Default is indirectory)")
+parser.add_argument('--outarray', '-outA', default='rdcs.npy',\
+  help ="The name of the file containing the array of RDCs. (Default is rdcs.npy)")
+parser.add_argument('--inD',  \
+        help ="Dipolar Coupling input file. Determine which rdcs to calculate (see Pales odcumpentation).", \
+        required=True)
 parser.add_argument('-H', action='store_true', help ="Use -H option in Pales (see Pales documentation).")
 
 args = parser.parse_args()
@@ -46,12 +62,20 @@ else: args.outdirectory=args.indirectory
 #Executing generate_rdc_files. Storing in a .dat file the name of all the processed PDBs in order.
 
 writer=open(args.outdirectory+'Processed_PDB.dat', mode='w')
+rdcs_array = []
 
 print('Generating %i rdcs from %s in %s.'%(len(filelist_pdbs), args.indirectory, args.outdirectory))
 for i, filename in enumerate(filelist_pdbs):
-    print("\rDoing structure %5d" %(i,), end="")
+    print("\rDoing structure %5d" %(i+1,), end="")
     generate_rdcs_files(args.path, filename, args.inD, filename[:-4], args.H)
     if args.outdirectory!=args.indirectory: subp.call(['mv', filename[:-4]+'.rdcs', args.outdirectory])
     writer.write(filename+'\n')
+    # Get the RDCS for the file
+    rdcs_array.append(get_rdcs(filename))
+  
 writer.close()
 print()
+
+rdcs_array = np.asarray(rdcs_array)
+np.save(args.outarray, rdcs_array)
+
