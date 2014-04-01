@@ -3,6 +3,7 @@ RunPales v1.0
 
 RunPales reads all the pdbs from a directory, calls Pales to calculate the RDCs and finally parses the Pales generated RDC file to conver it into a numpy array. This array is the input needed for MaxEnt.
 
+
 ##Usage:
 
 `RunPales.py [-h] --path PATH [--outdirectory OUTDIRECTORY]
@@ -31,7 +32,13 @@ optional arguments:
 
 Usage examples:
 ```
-python3 RunPales-1.0.py --path '/home/melchor/Software/pales/linux/pales' \
---indirectory '/home/melchor/CSIC/IDP/Pales/sendai/flexible_mecano/pdbs' \
---outdirectory './test'  -inD '/home/melchor/CSIC/IDP/Pales/sendai/rdcs' -H
+python3 RunPales-1.0.py pdbs --path '/home/melchor/Software/pales/linux/pales' \
+--outdirectory 'rdc_files' -inD 'sendai.rdcs' -H
+```
+Alternatively, after download, you can convert the python file into an executable with:
+`chmod +x RunPales-1.0.py`.
+Then, you can call it with:
+```
+RunPales-1.0.py pdbs --path '/home/melchor/Software/pales/linux/pales' \
+--outdirectory 'rdc_files' -inD 'sendai.rdcs' -H
 ```
