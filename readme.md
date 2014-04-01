@@ -8,6 +8,12 @@ The RDCs will be scaled to fit the experimental RDCs.
 
 To simplify the generation of RDCs from a set of PDB structures, we provide the python scripy RunPales.py.
 
+The full algorithm is described in:
+
+M. Sanchez-Martinez, R. Crehuet "Application of the Maximum Entropy Principle to determine ensembles of Intrinsically Disordered Proteins from Residual Dipolar Couplings", submitted to _Phys. Chem. Chem. Phys._
+
+Please, cite this reference if you use the MaxEnt code.
+
 RunPales
 ========
 
