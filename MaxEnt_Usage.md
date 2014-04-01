@@ -1,31 +1,58 @@
 MaxEnt v1.0
 ===========
+The program implements the Maximum Entropy fit of an ensemble of RDCs to a set of experimental RDCs as described in the publication [1].
 
-Maximum Entropy. Fit a set of calculated RDCs to experimental or calculated RDCs
+We provide the RunPales code to generate an array of RDCs, but the initial RDCs can be generated with other software.
 
-Mandatory arguments:
+If you use this code, please cite the following publication:
 
+[1] M. Sanchez-Martinez, R. Crehuet, "Application of the Maximum Entropy Principle to determine ensembles of Intrinsically Disordered Proteins from Residual Dipolar Couplings", submitted to _Phys. Chem. Chem. Phys._
 
--c, --calculated                      Entry the file that contains the second set of RDCs. Average of calculated RDCs from                                       a molecular simulation.
+##Usage:
+```bash
+MaxEnt.py [-h] [--save SAVE] [--save_weights SAVE_WEIGHTS]
+                 [--save_image SAVE_IMAGE] [--initial_residue INITIAL_RESIDUE]
+                 [--final_residue FINAL_RESIDUE] 
+                 calculated experimental
+```
 
--e, --experimental                    Entry the file that contains the first set od RDCS. Experimental or Calculated RDCs                                       ensemble. Are the values to which second set of RDCs values are going to be fitted.
+Maximum Entropy fit of ensemble RDCs to experimental RDCs
 
--r, --initial_residue                 Enter the initial residue number.
+positional arguments:
 
--f, --final_residue                   Enter the final residue number.
+  `calculated`            RDCs for each structure. A numpy array or a text file
+                        of shape (M,N).
+                        
+  `experimental`          Experimental RDCs. A numpy array or a text file of
+                        shape (2,N), where the first column is the residue
+                        number and the second its RDC value
+                        
 
+optional arguments:
 
-Optional arguments:
+  `-h`, `--help`            show this help message and exit
   
--h,  --help                           Show the help message and exit.
+  `--save SAVE`, `-s SAVE`  Save the Optimized RDCs in text or numpy format
+                        (according to extension)
+                        
+  `--save_weights SAVE_WEIGHTS`, `-sw SAVE_WEIGHTS`
+                        Save the Optimized weights in text or numpy (npy)
+                        format (according to extension).
+                        
+  `--save_image SAVE_IMAGE`, `-si SAVE_IMAGE`
+                        Save an image of the Optimized RDCs together with the
+                        initial RDCs sets and the optimized weights
+                        
+  `--initial_residue INITIAL_RESIDUE`, `-i INITIAL_RESIDUE`
+                        Initial residue to fit by the RDCs
+                        
+  `--final_residue FINAL_RESIDUE`, `-f FINAL_RESIDUE`
+                        Final residue to fit by the RDCs
 
--s,  --save {dat,txt,npy}             Save the Optimized RDCs into a file type '.dat', '.txt' or '.npy'.
-
--sw, --save_weights {dat,txt,npy}     Save the Optimized weights into a file type '.dat', '.txt' or '.npy'.
-
--si, --save_image                     Save an image of the Optimized RDCs together with the initial RDCs sets and the                                           distribution of the weights after optimization in '.png' or '.jpeg' format.                                               Optimized RDCs (red), experimental od calculated RDCs (blue), calculated unweighted                                       RDCs (green).
 
 
 Usage example :
 
-python3 MaxEnt-1.0.py --experimental '/home/melchor/CSIC/IDP/MaximumEntropy/sendai_rdcs_fm.png.dat' --calculated '/home/melchor/CSIC/IDP/MaximumEntropy/sendai2/new-rdcs-values-sendai-t01.npy' --initial_residue '12' --final_residue '42' --save 'dat' --save_weights 'dat' --save_image 'png'
+`python3 ./MaxEnt-1.0.py new-rdcs-values-sendai-t01.npy sendai_rdcs_fm.png.dat -i 13 -f 43 -sw w.npy -si foo.png -s q.dat`
+Alternatively, after download, you can convert the python file into an executable with: chmod +x MaxEnt-1.0.py. Then, you can call it with:
+`./MaxEnt-1.0.py new-rdcs-values-sendai-t01.npy sendai_rdcs_fm.png.dat -i 13 -f 43 -sw w.npy -si foo.png -s q.dat`
