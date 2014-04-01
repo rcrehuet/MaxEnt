@@ -20,7 +20,7 @@ optional arguments:
                         The name of the file containing the array of RDCs.
                         (Default is rdcs.npy)
   `--inD IND`             Dipolar Coupling input file. Determine which rdcs to
-                        calculate (see Pales odcumpentation).
+                        calculate (see Pales documpentation).
   `-H`                    Use -H option in Pales (see Pales documentation).
 
 
