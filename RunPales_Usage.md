@@ -1,7 +1,7 @@
 RunPales v1.0
 =============
 
-RunPales reads all the pdbs from a file, calls Pales to calculate the RDCs and finally parses the Pales generated RDC file to conver it into a numpy array. This array is the input needed for MaxEnt.
+RunPales reads all the pdbs from a directory, calls Pales to calculate the RDCs and finally parses the Pales generated RDC file to conver it into a numpy array. This array is the input needed for MaxEnt.
 
 ##Usage:
 
