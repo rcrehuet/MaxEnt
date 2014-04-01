@@ -2,6 +2,9 @@
 """
 Run pales-linux to generate all RDCs from the PDBs of a directory.
 The -H option determines which option to use when calling pales
+
+Author: Ramon Crehuet, Melchor Sanchez-Martinez
+Date: 02/04/2014
 """
 import sys, os
 import glob
