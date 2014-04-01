@@ -3,7 +3,7 @@ RunPales v1.0
 
 RunPales. Extract RDC values from .pdb files using the PALES program.
 
-Mandatory options:
+Mandatory arguments:
 
 `-p`, `--path`                             Indicate the the path to the directory where the PALES executable is.
 
@@ -17,7 +17,7 @@ Mandatory options:
 
 
 
-Optional Options:
+Optional arguments:
 
 `--help`, `-h`                                 Show this help message and exit.
 
