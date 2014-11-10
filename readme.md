@@ -10,7 +10,8 @@ To simplify the generation of RDCs from a set of PDB structures, we provide the 
 
 The full algorithm is described in:
 
-* M. Sanchez-Martinez, R. Crehuet "Application of the Maximum Entropy Principle to determine ensembles of Intrinsically Disordered Proteins from Residual Dipolar Couplings", submitted to _Phys. Chem. Chem. Phys._
+* M. Sanchez-Martinez, R. Crehuet "Application of the Maximum Entropy Principle to determine ensembles of Intrinsically Disordered Proteins from Residual Dipolar Couplings", submitted to _Phys. Chem. Chem. Phys._ 2014, Advance Article, DOI 10.1039/C4CP03114H
+
 
 Please, cite this reference if you use the MaxEnt code.
 
