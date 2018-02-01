@@ -35,7 +35,7 @@ Ramon Crehuet Simon, ramon.crehuet@iqac.csic.es
 
 Melchor Sanchez Martinez, melchor.sanchez@iqac.csic.es
 
-Computational and Theoretical Chemistry Group, http://www.iqac.csic.es/qteor/
+Computational and Theoretical Chemistry Group, http://www.iqac.csic.es/qtc/
 
 
 ----------------------------------------------------------
