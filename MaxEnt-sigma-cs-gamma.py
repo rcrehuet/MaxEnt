@@ -74,6 +74,8 @@ parser.add_argument("--save_weights", "-sw", \
 parser.add_argument("--save_image", "-si",  \
    help="Save an image of the Optimized data together with the initial data sets and the optimized weights")
 
+parser.add_argument("--sigma2", help = "Variance of the gaussian error model. Default 0 (no error model)", default=0.0)
+
 parser.add_argument("--initial_residue", "-i", help = "Initial residue to fit", type=int)
 parser.add_argument("--final_residue", "-f", help = "Final residue to fit", type=int)
 
@@ -107,13 +109,28 @@ else:
     fin = len(Q)    
 residues = np.arange(int(ini), int(fin))
 
+try:
+    sigma2 = float(args.sigma2)
+except ValueError:
+    try:
+        sigma2 = np.load(args.sigma2)
+    except FileNotFoundError:
+        print("File {} for the weights not found.".format(args.sigma2))
+        sys.exit()
+except:
+    print("sigma2 has to be either a number or a name of a numpy array file.")
+    sys.exit()
+
+
 q = q[:, residues]	
 
 lam = np.zeros(len(Q)) #Lambda initialization
 
-#The experimental error (a vector)
-sigma2 = 2.0**2
-sigma2 = sigma2*np.ones_like(lam)
+if type(sigma2) is float:
+    sigma2 = sigma2*np.ones_like(lam)
+elif len(sigma2)!=len(lam):
+    print("sigma2 size is different from the number of observables.")
+    sys.exit()
 
 #Minimize reducing k until threshold is reached
 fit = rmsd(lam, q, Q)
