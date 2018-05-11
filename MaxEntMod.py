@@ -68,12 +68,17 @@ def fit(q,Q, sigma2, lam=None):
     #Minimize
     if lam is None:
         lam = np.zeros(len(Q)) #Lambda initialization
-    if type(sigma2) is float:
+    if type(sigma2) is float or sigma2.size==1:
         sigma2 = sigma2*np.ones_like(lam)
 
-    result = so.minimize(_gamma, lam.astype(np.float128), jac=_grad_gamma,
-      args=(q.astype(np.float128), Q.astype(np.float128), sigma2.astype(np.float128)))
+    #result = so.minimize(_gamma, lam.astype(np.float128), jac=_grad_gamma,
+    #  args=(q.astype(np.float128), Q.astype(np.float128), sigma2.astype(np.float128)))
+
+    result = so.minimize(_gamma, lam, jac=_grad_gamma,
+           args=(q, Q, sigma2))
+    if not result.success: print("Minimisation not converged!")
     return result.x
+        
 
 
 if __name__=='__main__':
