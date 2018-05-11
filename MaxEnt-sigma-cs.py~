@@ -1,0 +1,188 @@
+#!/usr/bin/env python3
+"""
+A maximum entropy implementation to reproduce RDCs.
+Giving two sets of RDCs values, optimizes the values
+of one of the sets respect to the other.
+
+This vesion includes a better way to include errors based on:
+https://arxiv.org/abs/1801.05247
+
+sigma2 is equivalent to the previous threshold and is the error in the exp. data assumed to be normally distributed.
+
+This version is for chemical shifts, where one need not and cannot rescale (factq removed)
+
+Author: Ramon Crehuet, Melchor Sanchez-Martinez
+
+Date: 03/04/2014
+"""
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.optimize as so
+import argparse
+plt.ion()
+
+
+def w(lam, q):
+    """
+    return the weights
+    """
+    w = np.exp(np.dot(-q,lam))
+    w /= w.sum()
+    return w
+
+def qave(lam, q):
+    """
+    return the expected RDCs values for a given lambas
+    """
+    return np.dot(w(lam,q),q)
+
+
+def grad_fit_rmsd2(lam, q, Q, sigma2
+):
+    """
+    return the gradient of fit_rmsd2 with respect to lam
+    """
+    Qtemp = Q + lam*sigma2
+    # Gradient of qave (each row i is dq/dlambda_i)
+    dq=-np.tensordot(q,(np.exp(np.dot(-q,lam))*q.T).T, axes=[0,0])
+    qa = qave(lam,q)
+    df1 = 2*np.dot(dq-sigma2*np.ones_like(lam), qa-Qtemp)
+    # factor coming from f2
+    #df2 = 2*k*lam
+    return df1/len(Q)
+
+def fit_rmsd2(lam, q, Q, sigma2):
+    """
+    Return the f2 function. See the associated article.
+    """
+    qa = qave(lam, q)
+    Qtemp = Q+lam*sigma2
+    vec = qa - Qtemp
+    f1 = np.dot(vec, vec)
+    #f2 = k*np.dot(lam, lam)
+    return f1/len(Q)
+
+def rmsd(lam, q, Q):
+    """
+    Return the RMSD between experiental and calculated RDCs. The f1 function in 
+    the associated article.
+    """
+    qa = qave(lam, q)
+    vec = qa - Q
+    return np.sqrt(np.dot(vec, vec)/len(Q))
+
+
+#Defining the arguments:
+parser = argparse.ArgumentParser(description="Maximum Entropy fit of ensemble RDCs to experimental RDCs")
+parser.add_argument("calculated", help="RDCs for each structure. A numpy array or a text file of shape (M,N).")
+parser.add_argument("experimental", help = "Experimental RDCs. A numpy array or a text file of shape (2,N), where the first column is the residue number and the second its RDC value")
+parser.add_argument("--save", "-s", \
+    help="Save the Optimized RDCs in text or numpy format (according to extension)")
+parser.add_argument("--save_weights", "-sw", \
+   help="Save the Optimized weights in text or numpy (npy) format (according to extension).")
+parser.add_argument("--save_image", "-si",  \
+   help="Save an image of the Optimized RDCs together with the initial RDCs sets and the optimized weights")
+
+parser.add_argument("--initial_residue", "-i", help = "Initial residue to fit by the RDCs", type=int)
+parser.add_argument("--final_residue", "-f", help = "Final residue to fit by the RDCs", type=int)
+
+
+args = parser.parse_args()
+
+if args.experimental: # Experimental RDCs data is loaded.
+    fileext = args.experimental.split(".")[-1]
+    if fileext == "npy" :
+        Q = np.load(args.experimental)
+    else:
+        Q = np.loadtxt(args.experimental)
+resind = Q[:, 0]
+resind = np.asarray(resind, dtype=np.int)
+Q = Q[:, 1]
+
+if args.calculated:# Calculated RDCs data is loaded.
+    fileext = args.calculated.split(".")[-1]
+    if fileext == "npy" :
+        q = -np.load(args.calculated)
+    else:
+        q = -np.loadtxt(args.calculated)
+
+if args.initial_residue:
+    ini = args.initial_residue-1
+else:
+    ini = 0
+if args.final_residue:
+    fin = args.final_residue-1
+else:
+    fin = len(Q)    
+residues = np.arange(int(ini), int(fin))
+
+q = q[:, residues]	
+
+lam = np.zeros(len(Q)) #Lambda initialization
+# Generate initial plot
+fig = plt.figure(figsize=(11, 6))
+ax = fig.add_subplot(121)
+ref, = ax.plot(resind, Q, 'o-', label='experimental')
+
+#The experimental error
+sigma2 = 50.**2
+
+#add the unscaled values
+qnew = qave(lam, q)
+ax.plot(resind, qnew, 'x-', label='inital')
+axw = fig.add_subplot(122)
+line, = ax.plot(resind, qnew, 'o-', label='re-weighted')
+line2, = ax.plot(resind, Q, 's-', label="Exp. + error")
+
+#Plot Weights
+wplot, = axw.semilogy(np.ones(len(q)), '-')
+axw.set_ylim(0.1,10)
+plt.draw()
+
+#Minimize reducing k until threshold is reached
+fit = rmsd(lam, q, Q)
+print ("="*50)
+print (" "*15, " Maximum Entropy Fit")
+print ("="*50)
+print ("%9s %18s ".format('Fit','Lambda'))
+print
+print ("="*50)
+print("{:10.3f}  {:15.3e}".format(fit, 0.0))
+
+lam = so.fmin_ncg(fit_rmsd2, lam, fprime=grad_fit_rmsd2,
+      args=(q, Q, sigma2), disp=False, epsilon = 1e-10)
+fit = rmsd(lam, q, Q)
+qnew = qave(lam, q)
+line.set_ydata(qnew)
+line2.set_ydata(Q+lam*sigma2)
+wplot.set_ydata(np.sort(w(lam,q)*len(q)))
+avelam = np.sqrt(np.dot(lam, lam)/len(lam))
+print("{:10.3f}  {:15.3e}" .format(fit, avelam))
+print("="*10*len(lam))
+print((len(lam)*"{:8.2e} ").format(*lam))
+plt.draw()
+
+w_opt = w(lam, q)
+ax.legend(fontsize='small', loc='best')
+axw.set_ylim(10**np.floor(np.log10(np.min(len(q)*w_opt))),10**np.ceil(np.log10(np.max(len(q)*w_opt))))
+#plt.show()
+if args.save:
+    fileext = args.save.split(".")[-1]
+    if fileext =='npy':
+        np.save(args.save, np.c_[resind, qnew])
+    else:
+        np.savetxt(args.save, np.c_[resind,qnew])
+#Save Optimized weights
+if args.save_weights:
+    fileext = args.save_weights.split(".")[-1]
+    if fileext =='npy':
+        np.save(args.save_weights, w_opt)
+    else:
+        np.savetxt(args.save_weights, w_opt)
+
+#Save Iamge
+if args.save_image:
+    plt.savefig(args.save_image)
+
+input()

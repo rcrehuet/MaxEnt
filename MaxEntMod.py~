@@ -62,7 +62,7 @@ def n_eff(lam, q):
     """
     Return the normalized Kish n_effective size
     """
-    return 1./np.sum(w(lam, q)**2)/q.shape[0]
+    return 1./np.sum(w(lam, q)**2)/q.shape(0)
 
 
 def fit(q,Q, sigma2, lam=None):
